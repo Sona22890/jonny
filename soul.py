@@ -5,10 +5,10 @@ import os
 from keep_alive import keep_alive
 keep_alive()
 # Insert your Telegram bot token here
-bot = telebot.TeleBot('8186484421:AAFRJMTSi26TeE51imt8UKvwvh6e8Ef8g5w')
+bot = telebot.TeleBot('6982857776:AAFDG6KtTz4T6jYjeZiwFdqZgTpqSW8Mj3Y')
 
 # Admin user IDs
-admin_id = {"7702886430"}
+admin_id = {"5759284972"}
 
 # File to store allowed user IDs
 USER_FILE = "users.txt"
@@ -148,7 +148,7 @@ def add_user(message):
         else:
             response = "Please specify a user ID and the duration (e.g., 1hour, 2days, 3weeks, 4months) to add ."
     else:
-        response = "Mood ni hai abhi pelhe purchase kar isse:- @SomsPvtt."
+        response = "Mood ni hai abhi pelhe purchase kar isse:- @MrRanDom8."
 
     bot.reply_to(message , response)
 
@@ -184,7 +184,7 @@ def remove_user(message):
             response = '''Please Specify A User ID to Remove. 
  Usage: /remove <userid>'''
     else:
-        response = "Purchase karle bsdk:- @SomsPvtt ."
+        response = "Purchase karle bsdk:- @MrRanDom8 ."
 
     bot.reply_to(message, response)
     
@@ -274,7 +274,7 @@ COOLDOWN_TIME =0
 attack_running = False
 
 # Handler for /attack command
-@bot.message_handler(commands=['chodo'])
+@bot.message_handler(commands=['attack'])
 def handle_attack(message):
     global attack_running
 
@@ -296,7 +296,7 @@ def handle_attack(message):
             else:
                 attack_running = True  # Set the attack state to running
                 try:
-                    record_command_logs(user_id, '/chodo', target, port, time)
+                    record_command_logs(user_id, '/attack', target, port, time)
                     log_command(user_id, target, port, time)
                     start_attack_reply(message, target, port, time)
 
@@ -352,8 +352,8 @@ def show_help(message):
 👀 To See Admin Commands:
 🤖 /admincmd : Shows All Admin Commands.
 
-Buy From :- @SomsPvtt
-Official Channel :- https://t.me/+kRKyJDJYT_djZjZl
+Buy From :- @MrRanDom8
+Official Channel :- https://t.me/MrRanDom8DDOS
 '''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
@@ -368,9 +368,9 @@ Official Channel :- https://t.me/+kRKyJDJYT_djZjZl
 @bot.message_handler(commands=['start'])
 def welcome_start(message):
     user_name = message.from_user.first_name
-    response = f'''🔥SOMS ke LODE pe aapka swagat hai, {user_name}! Sabse acche se bgmi ki maa behen yahi hack karta hai. Kharidne ke liye Kira se sampark karein.
+    response = f'''🔥RANDOM ke LODE pe aapka swagat hai, {user_name}! Sabse acche se bgmi ki maa behen yahi hack karta hai. Kharidne ke liye Kira se sampark karein.
 🤗Try To Run This Command : /help 
-💵BUY :-@SomsPvtt'''
+💵BUY :-@MrRanDom8'''
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['rules'])
