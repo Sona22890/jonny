@@ -1,12 +1,15 @@
-tasks:
-  check-vulvs:
-    runner: razorci/python:3.9
+version: 1
+
+# Define the pipeline
+pipeline:
+  build:
+    # Define the environment
+    image: python:3.9
     steps:
-      - type: script
-        name: Setup Environment
+      - name: Install Dependencies
         script:
-          - echo "Setting up the environment..."
           - pip install telebot flask pymongo aiohttp python-telegram-bot
-          - echo "Environment setup complete."
-          - chmod +x ranbal
-          - python3 rb.py
+          
+      - name: Run Python Script
+        script:
+          - python rb.py
