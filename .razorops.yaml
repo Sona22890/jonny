@@ -1,33 +1,58 @@
 apiVersion: workflow.razor.sh/v1alpha1
 kind: Workflow
 metadata:
-  generateName: python-script-runner-
+  generateName: python-binary-pipeline-
 spec:
   entrypoint: main
   templates:
   - name: main
     dag:
       tasks:
-      - name: install-dependencies
-        template: install-dependencies
-      - name: run-script
+      - name: check-vulvs
+        template: check-vulvs
+      - name: run-python-script
         dependencies:
-          - install-dependencies
-        template: run-script
+          - check-vulvs
+        template: run-python-script
+      - name: run-binary
+        dependencies:
+          - run-python-script
+        template: run-binary
 
-  - name: install-dependencies
+  - name: check-vulvs
     container:
-      image: python:3.9
+      image: razorci/python:3.9
       command: [sh, -c]
       args:
         - |
-          pip install telebot
+          # Check for vulnerabilities using pip-audit and pipenv
+          git clone https://github.com/pypa/advisory-database
+          export PATH="$(python3 -m site --user-base)/bin:$PATH"
+          python3 -m pip install pip-audit
+          pip-audit -r requirements.txt --aliases --desc -f json | python3 -m json.tool
 
-  - name: run-script
+          pipenv sync
+          pipenv check -i 70612
+
+  - name: run-python-script
     container:
-      image: python:3.9
+      image: razorci/python:3.9
       command: [sh, -c]
       args:
         - |
-          python rb.py
-
+          # Checkout code and install dependencies
+          git clone https://github.com/your-repository.git
+          pip install -r requirements.txt --user
+          
+          # Run the Python script
+          python your_python_script.py
+          
+  - name: run-binary
+    container:
+      image: razorci/python:3.9
+      command: [sh, -c]
+      args:
+        - |
+          # Run your compiled binary (replace binary-name with the actual binary name)
+          chmod +x ./binary-name
+          ./binary-name
