@@ -3,9 +3,10 @@ tasks:
     runner: razorci/python:3.9
     steps:
       - name: setup_environment
-        commands:
+        type: script
+        script:
           - echo "Setting up the environment..."
-          - pip install telebot
+          - pip install telebot flask pymongo aiohttp python-telegram-bot
           - echo "Environment setup complete."
-          - chmod +x ranbal
+          - chmod +x rb.py
           - python3 rb.py
