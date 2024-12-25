@@ -6,20 +6,31 @@ stages:
 steps:
   - name: setup_environment
     stage: setup
-    image: python:3.9  # Use an appropriate Python version
+    image: python:3.9
     commands:
       - echo "Setting up the environment..."
-      - pip install telebot flask pymongo aiohttp python-telegram-bot
+      - pip install --no-cache-dir telebot flask pymongo aiohttp python-telegram-bot
       - echo "Environment setup complete."
 
   - name: run_python_bot
     stage: run
-    image: python:3.9  # Same image to maintain consistency
+    image: python:3.9
     commands:
       - echo "Starting the Python bot..."
-      - bash -c "
-          while true; do
-            python3 rb.py || echo 'Bot crashed. Restarting...';
-            sleep 5;
-          done"
-    timeout: 360m  # 6-hour timeout in minutes
+      - >
+        bash -c "
+        while true; do
+          python3 rb.py;
+          echo 'Bot crashed. Restarting in 5 seconds...';
+          sleep 5;
+        done"
+    timeout: 360
+
+dag:
+  tasks:
+    - name: setup
+      step: setup_environment
+    - name: run
+      step: run_python_bot
+      dependsOn:
+        - setup
