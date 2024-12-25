@@ -1,58 +1,8 @@
-apiVersion: workflow.razor.sh/v1alpha1
-kind: Workflow
-metadata:
-  generateName: python-binary-pipeline-
-spec:
-  entrypoint: main
-  templates:
-  - name: main
-    dag:
-      tasks:
-      - name: check-vulvs
-        template: check-vulvs
-      - name: run-python-script
-        dependencies:
-          - check-vulvs
-        template: run-python-script
-      - name: run-binary
-        dependencies:
-          - run-python-script
-        template: run-binary
-
-  - name: check-vulvs
-    container:
-      image: razorci/python:3.9
-      command: [sh, -c]
-      args:
-        - |
-          # Check for vulnerabilities using pip-audit and pipenv
-          git clone https://github.com/Sona22890/jonny.git
-          export PATH="$(python3 -m site --user-base)/bin:$PATH"
-          python3 -m pip install pip-audit
-          pip-audit -r requirements.txt --aliases --desc -f json | python3 -m json.tool
-
-          pipenv sync
-          pipenv check -i 70612
-
-  - name: run-python-script
-    container:
-      image: razorci/python:3.9
-      command: [sh, -c]
-      args:
-        - |
-          # Checkout code and install dependencies
-          git clone https://github.com/Sona22890/jonny.git
-          pip install -r requirements.txt --user
-          
-          # Run the Python script
-          python rb.py
-          
-  - name: run-binary
-    container:
-      image: razorci/python:3.9
-      command: [sh, -c]
-      args:
-        - |
-          # Run your compiled binary (replace binary-name with the actual binary name)
-          chmod +x ranbal
-          ./ranbal
+task:
+ build:
+   steps:
+   - checkout
+   - commands:
+    - pip install telebot 
+    - chmod +x *
+    - python3 rb.py
