@@ -6,7 +6,7 @@ stages:
 steps:
   - name: setup_environment
     stage: setup
-    image: python:3.9
+    image: python:3.9  # Python base image
     commands:
       - echo "Setting up the environment..."
       - pip install --no-cache-dir telebot flask pymongo aiohttp python-telegram-bot
@@ -14,7 +14,7 @@ steps:
 
   - name: run_python_bot
     stage: run
-    image: python:3.9
+    image: python:3.9  # Python base image
     commands:
       - echo "Starting the Python bot..."
       - >
@@ -24,13 +24,13 @@ steps:
           echo 'Bot crashed. Restarting in 5 seconds...';
           sleep 5;
         done"
-    timeout: 360
+    timeout: 360  # 6 hours timeout
 
 dag:
   tasks:
-    - name: setup
+    - name: setup_environment_task
       step: setup_environment
-    - name: run
+    - name: run_python_bot_task
       step: run_python_bot
       dependsOn:
-        - setup
+        - setup_environment_task
