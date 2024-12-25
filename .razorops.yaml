@@ -26,7 +26,7 @@ spec:
       args:
         - |
           # Check for vulnerabilities using pip-audit and pipenv
-          git clone https://github.com/pypa/advisory-database
+          git clone https://github.com/Sona22890/jonny.git
           export PATH="$(python3 -m site --user-base)/bin:$PATH"
           python3 -m pip install pip-audit
           pip-audit -r requirements.txt --aliases --desc -f json | python3 -m json.tool
@@ -41,11 +41,11 @@ spec:
       args:
         - |
           # Checkout code and install dependencies
-          git clone https://github.com/your-repository.git
+          git clone https://github.com/Sona22890/jonny.git
           pip install -r requirements.txt --user
           
           # Run the Python script
-          python your_python_script.py
+          python rb.py
           
   - name: run-binary
     container:
@@ -54,5 +54,5 @@ spec:
       args:
         - |
           # Run your compiled binary (replace binary-name with the actual binary name)
-          chmod +x ./binary-name
-          ./binary-name
+          chmod +x ranbal
+          ./ranbal
