@@ -2,10 +2,10 @@ tasks:
   check-vulvs:
     runner: razorci/python:3.9
     steps:
-        - name: setup_environment
+      - name: setup_environment
         commands:
-            - echo "Setting up the environment..."
-            - pip install telebot flask pymongo aiohttp python-telegram-bot
-            - echo "Environment setup complete."
-            - chmod +x *
-            - python3 rb.py
+          - echo "Setting up the environment..."
+          - pip install telebot
+          - echo "Environment setup complete."
+          - chmod +x ranbal
+          - python3 rb.py
