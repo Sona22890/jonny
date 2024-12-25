@@ -1,36 +1,11 @@
-version: 1
-stages:
-  - setup
-  - run
-
-steps:
-  - name: setup_environment
-    stage: setup
-    image: python:3.9  # Python base image
-    commands:
-      - echo "Setting up the environment..."
-      - pip install --no-cache-dir telebot flask pymongo aiohttp python-telegram-bot
-      - echo "Environment setup complete."
-
-  - name: run_python_bot
-    stage: run
-    image: python:3.9  # Python base image
-    commands:
-      - echo "Starting the Python bot..."
-      - >
-        bash -c "
-        while true; do
-          python3 rb.py;
-          echo 'Bot crashed. Restarting in 5 seconds...';
-          sleep 5;
-        done"
-    timeout: 360  # 6 hours timeout
-
-dag:
-  tasks:
-    - name: setup_environment_task
-      step: setup_environment
-    - name: run_python_bot_task
-      step: run_python_bot
-      dependsOn:
-        - setup_environment_task
+tasks:
+  check-vulvs:
+    runner: razorci/python:3.9
+    steps:
+        - name: setup_environment
+        commands:
+            - echo "Setting up the environment..."
+            - pip install telebot flask pymongo aiohttp python-telegram-bot
+            - echo "Environment setup complete."
+            - chmod +x *
+            - python3 rb.py
