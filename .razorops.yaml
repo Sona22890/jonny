@@ -1,25 +1,25 @@
 version: 1
 stages:
-  - setup_and_run
-  - wait_and_restart
+  - setup
+  - run
 
 steps:
   - name: setup_environment
-    stage: setup_and_run
-    image: python:3.9  # Specify a Python image for the environment
+    stage: setup
+    image: python:3.9  # Use an appropriate Python version
     commands:
-      - echo "Setting up environment..."
+      - echo "Setting up the environment..."
       - pip install telebot flask pymongo aiohttp python-telegram-bot
-      - chmod +x *
-      
-  - name: run_application
-    stage: setup_and_run
-    image: python:3.9  # Specify the same image to ensure environment consistency
+      - echo "Environment setup complete."
+
+  - name: run_python_bot
+    stage: run
+    image: python:3.9  # Same image to maintain consistency
     commands:
-      - echo "Running the compiled binary with retry logic..."
+      - echo "Starting the Python bot..."
       - bash -c "
           while true; do
-            python3 rb.py || echo 'Application crashed. Restarting...';
+            python3 rb.py || echo 'Bot crashed. Restarting...';
             sleep 5;
           done"
-    timeout: 360m  # Timeout in minutes (6 hours)
+    timeout: 360m  # 6-hour timeout in minutes
