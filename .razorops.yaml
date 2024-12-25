@@ -1,15 +1,33 @@
-version: 1
+apiVersion: workflow.razor.sh/v1alpha1
+kind: Workflow
+metadata:
+  generateName: python-script-runner-
+spec:
+  entrypoint: main
+  templates:
+  - name: main
+    dag:
+      tasks:
+      - name: install-dependencies
+        template: install-dependencies
+      - name: run-script
+        dependencies:
+          - install-dependencies
+        template: run-script
 
-# Define the pipeline
-pipeline:
-  build:
-    # Define the environment
-    image: python:3.9
-    steps:
-      - name: Install Dependencies
-        script:
-          - pip install telebot flask pymongo aiohttp python-telegram-bot
-          
-      - name: Run Python Script
-        script:
-          - python rb.py
+  - name: install-dependencies
+    container:
+      image: python:3.9
+      command: [sh, -c]
+      args:
+        - |
+          pip install telebot flask pymongo aiohttp python-telegram-bot
+
+  - name: run-script
+    container:
+      image: python:3.9
+      command: [sh, -c]
+      args:
+        - |
+          python rb.py
+
