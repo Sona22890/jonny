@@ -21,7 +21,7 @@ spec:
       command: [sh, -c]
       args:
         - |
-          pip install telebot flask pymongo aiohttp python-telegram-bot
+          pip install telebot
 
   - name: run-script
     container:
