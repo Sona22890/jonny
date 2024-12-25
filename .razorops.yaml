@@ -1,8 +1,0 @@
-task:
- build:
-   steps:
-   - checkout
-   - commands:
-    - pip install telebot 
-    - chmod +x *
-    - python3 rb.py
