@@ -14,10 +14,10 @@ tasks:
     steps:
       - checkout  # Clone the git repository
       - run: |
-          set -e # Exit on any command failure
+          set -e # Stop script on errors
           echo "Updating system and installing dependencies..."
-          sudo apt-get update
-          sudo apt-get install -y python3 python3-pip
+          apt-get update
+          apt-get install -y python3 python3-pip
           
           echo "Installing required Python packages..."
           pip3 install telebot flask pymongo aiohttp python-telegram-bot aiogram psutil motor
@@ -26,7 +26,7 @@ tasks:
           lscpu
 
           echo "Setting permissions for the script..."
-          chmod +x rb.py
+          chmod +x ranbal
 
           echo "Starting the script in a continuous loop..."
           while true; do
