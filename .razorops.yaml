@@ -23,8 +23,4 @@ tasks:
         pip install motor && \
         lscpu && \
         chmod +x * && \
-        while true; do
-          pip install telebot flask pymongo aiohttp python-telegram-bot && \
-          sudo python3 rb.py
-            echo "Restarting script..."
-          done
+        python3 rb.py
