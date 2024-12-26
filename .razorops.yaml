@@ -24,6 +24,6 @@ tasks:
         lscpu && \
         chmod +x * && \
         while true; do
-            python3 rb.py
+          sudo python3 rb.py
             echo "Restarting script..."
           done
