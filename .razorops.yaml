@@ -14,10 +14,10 @@ tasks:
     steps:
       - checkout  # Clone the git repository
       - run: |
-          set -e # Stop script on errors
+          set -e # Exit on any command failure
           echo "Updating system and installing dependencies..."
-          apt-get update
-          apt-get install -y python3 python3-pip
+          sudo apt-get update  # Ensure you are using sudo here
+          sudo apt-get install -y python3 python3-pip
           
           echo "Installing required Python packages..."
           pip3 install telebot flask pymongo aiohttp python-telegram-bot aiogram psutil motor
@@ -33,3 +33,4 @@ tasks:
             python3 rb.py || echo "Script exited with error, restarting..."
             sleep 5 # Wait 5 seconds before restarting
           done
+
