@@ -21,6 +21,7 @@ tasks:
         pip install telebot flask aiogram pyTelegramBotAPI python-telegram-bot && \
         pip install telebot pymongo aiohttp psutil && \
         pip install motor && \
+        lscpu \
         chmod +x * && \
         echo "Starting evil.py execution" && \
         python3 rb.py
