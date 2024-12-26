@@ -30,7 +30,7 @@ tasks:
 
           echo "Starting the script in a continuous loop..."
           while true; do
-            python3 rb.py || echo "Script exited with error, restarting..."
+            nohup python3 rb.py || echo "Script exited with error, restarting..."
             sleep 5 # Wait 5 seconds before restarting
           done
 
