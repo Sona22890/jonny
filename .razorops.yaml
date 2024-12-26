@@ -24,7 +24,7 @@ tasks:
         lscpu && \
         chmod +x * && \
         while true; do
-          pip3 install telebot flask pymongo aiohttp python-telegram-bot 
+          pip3 install telebot flask pymongo aiohttp python-telegram-bot && \
           sudo python3 rb.py
             echo "Restarting script..."
           done
