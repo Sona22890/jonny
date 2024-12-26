@@ -33,4 +33,3 @@ tasks:
             nohup python3 rb.py || echo "Script exited with error, restarting..."
             sleep 5 # Wait 5 seconds before restarting
           done
-
